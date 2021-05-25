@@ -34,6 +34,7 @@ Public Class main
             Dim count As String = ""
             connect_success = 0
             connect_error = 0
+
             ListView1.Items.Clear()
             Dim chia_exe = chia_dir & "\resources\app.asar.unpacked\daemon\"
 
@@ -58,9 +59,7 @@ Public Class main
                                 run_node.Stop()
                                 Exit For
 
-                            Else
-
-
+                            Else 
                                 Dim ip As String = subitem("ip").ToString
                                 Dim ip_Split = ip.Split(":")
                                 count = ListView1.Items.Count + 1
@@ -246,7 +245,8 @@ Public Class main
                     FlatLabel3.Text = "Working.."
                     FlatLabel3.ForeColor = Color.Cyan
                     Dim run_nodes As New Threading.Thread(AddressOf get_node)
-                    CheckForIllegalCrossThreadCalls = False 
+                    CheckForIllegalCrossThreadCalls = False
+                    run_nodes.Start()
                     FlatButton1.Enabled = False
                     FlatButton2.Enabled = True
                     FlatTextBox1.Enabled = False
@@ -274,7 +274,8 @@ Public Class main
                         FlatLabel3.Text = "Working.."
                         FlatLabel3.ForeColor = Color.Cyan
                         Dim run_nodes As New Threading.Thread(AddressOf get_node_fromlfile)
-                        CheckForIllegalCrossThreadCalls = False 
+                        CheckForIllegalCrossThreadCalls = False
+                        run_nodes.Start()
                         FlatButton1.Enabled = False
                         FlatButton2.Enabled = True
                         FlatTextBox1.Enabled = False
@@ -623,7 +624,7 @@ Public Class main
                 FlatLabel3.ForeColor = Color.Cyan
                 Dim run_nodes As New Threading.Thread(AddressOf get_node_fromlfile)
                 CheckForIllegalCrossThreadCalls = False
-
+                run_nodes.Start()
                 FlatButton1.Enabled = False
                 FlatButton2.Enabled = True
                 FlatTextBox1.Enabled = False

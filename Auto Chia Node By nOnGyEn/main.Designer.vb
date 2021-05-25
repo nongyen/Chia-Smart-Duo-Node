@@ -30,6 +30,7 @@ Partial Class main
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.run_node_fromfile = New System.Windows.Forms.Timer(Me.components)
         Me.FormSkin1 = New Chia_Smart_Duo_Node.FormSkin
+        Me.FlatCheckBox1 = New Chia_Smart_Duo_Node.FlatCheckBox
         Me.FlatButton4 = New Chia_Smart_Duo_Node.FlatButton
         Me.RadioButton2 = New Chia_Smart_Duo_Node.RadioButton
         Me.RadioButton1 = New Chia_Smart_Duo_Node.RadioButton
@@ -82,6 +83,7 @@ Partial Class main
         Me.FormSkin1.BackColor = System.Drawing.Color.White
         Me.FormSkin1.BaseColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(73, Byte), Integer))
         Me.FormSkin1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.FormSkin1.Controls.Add(Me.FlatCheckBox1)
         Me.FormSkin1.Controls.Add(Me.FlatButton4)
         Me.FormSkin1.Controls.Add(Me.RadioButton2)
         Me.FormSkin1.Controls.Add(Me.RadioButton1)
@@ -112,6 +114,21 @@ Partial Class main
         Me.FormSkin1.Size = New System.Drawing.Size(504, 421)
         Me.FormSkin1.TabIndex = 0
         Me.FormSkin1.Text = "Chia Smart Duo Node"
+        '
+        'FlatCheckBox1
+        '
+        Me.FlatCheckBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(73, Byte), Integer))
+        Me.FlatCheckBox1.BaseColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(47, Byte), Integer), CType(CType(49, Byte), Integer))
+        Me.FlatCheckBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.FlatCheckBox1.Checked = True
+        Me.FlatCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.FlatCheckBox1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.FlatCheckBox1.Location = New System.Drawing.Point(375, 131)
+        Me.FlatCheckBox1.Name = "FlatCheckBox1"
+        Me.FlatCheckBox1.Options = Chia_Smart_Duo_Node.FlatCheckBox._Options.Style1
+        Me.FlatCheckBox1.Size = New System.Drawing.Size(112, 22)
+        Me.FlatCheckBox1.TabIndex = 25
+        Me.FlatCheckBox1.Text = "Auto Re-Run"
         '
         'FlatButton4
         '
@@ -434,4 +451,5 @@ Partial Class main
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents run_node_fromfile As System.Windows.Forms.Timer
     Friend WithEvents FlatButton3 As Chia_Smart_Duo_Node.FlatButton
+    Friend WithEvents FlatCheckBox1 As Chia_Smart_Duo_Node.FlatCheckBox
 End Class
