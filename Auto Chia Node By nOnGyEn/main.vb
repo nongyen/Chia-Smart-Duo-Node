@@ -36,12 +36,14 @@ Public Class main
             connect_error = 0
             ListView1.Items.Clear()
             Dim chia_exe = chia_dir & "\resources\app.asar.unpacked\daemon\"
+
             For Each item As JProperty In results
                 item.CreateReader()
                 Select Case item.Name
                     Case "data"
 
                         For Each subitem In item.Value
+                            
                             If status_run = "Stop" Then
                                 Dim ip As String = subitem("ip").ToString
                                 Dim ip_Split = ip.Split(":")
@@ -86,7 +88,7 @@ Public Class main
                                     lvi.SubItems(2).ForeColor = Color.White
                                     FlatLabel5.Text = "Connect failed " & connect_error
 
-                                End If 
+                                End If
                                 ListView1.Items.Add(lvi)
 
                                 ListView1.Items(ListView1.Items.Count - 1).EnsureVisible()
@@ -101,8 +103,14 @@ Public Class main
             If status_run = "Stop" Then
                 FlatLabel3.Text = "Stopped!"
                 FlatLabel3.ForeColor = Color.DarkOrange
+                run_node.Stop()
             Else
-                FlatLabel3.Text = "Finish [Auto Run in 10 minutes]"
+                If FlatCheckBox1.Checked = True Then 
+                    Me.Invoke(New MethodInvoker(AddressOf run_node.Start))
+                    FlatLabel3.Text = "Finish [Auto Run in 10 minutes]"
+                Else
+                    FlatLabel3.Text = "Finish"
+                End If
             End If
             status_run = "No"
             FlatButton1.Enabled = True
@@ -113,6 +121,7 @@ Public Class main
             RadioButton2.Enabled = True
             FlatButton4.Enabled = True
         Catch ex As Exception
+            run_node.Stop()
             status_run = "No"
             FlatLabel3.Text = "Error " & ex.Message
             FlatButton1.Enabled = True
@@ -126,8 +135,7 @@ Public Class main
     End Sub
     Private Sub get_node_fromlfile()
         Try
-
-            ListView1.Items.Clear()
+ 
             Dim count As String = ""
             connect_success = 0
             connect_error = 0
@@ -191,8 +199,15 @@ Public Class main
                 FlatLabel3.ForeColor = Color.DarkOrange
                 run_node_fromfile.Stop()
             Else
-                FlatLabel3.Text = "Finish [Auto Run in 10 minutes]"
+                If FlatCheckBox1.Checked = True Then 
+                    Me.Invoke(New MethodInvoker(AddressOf run_node_fromfile.Start))
+                    FlatLabel3.Text = "Finish [Auto Run in 10 minutes]"
+                Else
+                    FlatLabel3.Text = "Finish"
+                End If
             End If
+
+
             status_run = "No"
             FlatButton1.Enabled = True
             FlatButton2.Enabled = False
@@ -201,6 +216,7 @@ Public Class main
             RadioButton1.Enabled = True
             RadioButton2.Enabled = True
             FlatButton4.Enabled = True
+
         Catch ex As Exception
             run_node_fromfile.Stop()
             status_run = "No"
@@ -230,8 +246,7 @@ Public Class main
                     FlatLabel3.Text = "Working.."
                     FlatLabel3.ForeColor = Color.Cyan
                     Dim run_nodes As New Threading.Thread(AddressOf get_node)
-                    CheckForIllegalCrossThreadCalls = False
-                    run_nodes.Start()
+                    CheckForIllegalCrossThreadCalls = False 
                     FlatButton1.Enabled = False
                     FlatButton2.Enabled = True
                     FlatTextBox1.Enabled = False
@@ -244,7 +259,7 @@ Public Class main
                     My.Settings.chia_ver = FlatTextBox1.Text
                     My.Settings.Save()
                     My.Settings.Reload()
-                    run_node.Start()
+                    
                 Else
                     MessageBox.Show("No data node found, please try again. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -259,8 +274,7 @@ Public Class main
                         FlatLabel3.Text = "Working.."
                         FlatLabel3.ForeColor = Color.Cyan
                         Dim run_nodes As New Threading.Thread(AddressOf get_node_fromlfile)
-                        CheckForIllegalCrossThreadCalls = False
-                        run_nodes.Start()
+                        CheckForIllegalCrossThreadCalls = False 
                         FlatButton1.Enabled = False
                         FlatButton2.Enabled = True
                         FlatTextBox1.Enabled = False
@@ -273,7 +287,7 @@ Public Class main
                         My.Settings.chia_ver = FlatTextBox1.Text
                         My.Settings.Save()
                         My.Settings.Reload()
-                        run_node_fromfile.Start()
+
                     ElseIf select_file = "No" Then
                         MessageBox.Show("Please Select Node File", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
@@ -443,6 +457,7 @@ Public Class main
     End Sub
 
     Private Sub run_node_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles run_node.Tick
+        run_node.Stop()
         status_run = "Yes"
         FlatLabel3.Text = "Working.."
         FlatLabel3.ForeColor = Color.Cyan
@@ -457,7 +472,7 @@ Public Class main
         My.Settings.chia_ver = FlatTextBox1.Text
         My.Settings.Save()
         My.Settings.Reload()
-        run_node.Start()
+
     End Sub
 
     Private Sub timer_reload_node_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles timer_reload_node.Tick
@@ -603,11 +618,12 @@ Public Class main
         If status_run = "No" Then
             If select_file = "Yes" Then
                 status_run = "Yes"
+                run_node_fromfile.Stop()
                 FlatLabel3.Text = "Working.."
                 FlatLabel3.ForeColor = Color.Cyan
                 Dim run_nodes As New Threading.Thread(AddressOf get_node_fromlfile)
                 CheckForIllegalCrossThreadCalls = False
-                run_nodes.Start()
+
                 FlatButton1.Enabled = False
                 FlatButton2.Enabled = True
                 FlatTextBox1.Enabled = False
@@ -622,5 +638,13 @@ Public Class main
                 run_node_fromfile.Stop()
             End If
         End If
+    End Sub
+
+    Private Sub FlatButton1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FlatButton1.Click
+
+    End Sub
+
+    Private Sub FlatButton2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FlatButton2.Click
+
     End Sub
 End Class
