@@ -163,12 +163,12 @@ Public Class main
                         lvi.SubItems(2).ForeColor = Color.White
                         FlatLabel4.Text = "Connected " & connect_success
 
-                        'Dim p As Process = New Process()
-                        'p.StartInfo = New ProcessStartInfo("chia.exe")
-                        'p.StartInfo.WorkingDirectory = chia_exe
-                        'p.StartInfo.Arguments = "show -a " & i
-                        'p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-                        'p.Start()
+                        Dim p As Process = New Process()
+                        p.StartInfo = New ProcessStartInfo("chia.exe")
+                        p.StartInfo.WorkingDirectory = chia_exe
+                        p.StartInfo.Arguments = "show -a " & i
+                        p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+                        p.Start()
                     Else
                         lvi.SubItems.Add("Connect Error")
                         connect_error = connect_error + 1
