@@ -30,3 +30,7 @@
 
 # ความต้องการของโปรแกรม
 * .net framework 3.5
+
+โปรแกรมพัฒนาด้วย Microsoft Visual Studio 2008 สามารถนำ Clone ไปพัฒนาต่อได้ทันที
+
+* Facebook: www.facebook.com/nongyen
