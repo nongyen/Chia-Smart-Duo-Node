@@ -1,6 +1,6 @@
 # Welcome to Chia Smart Duo Node V1.0
 
-![Img1](https://www.img.in.th/images/943e16ca61f3345c6d8c8e0eccc02d5c.png)
+![Img1](https://raw.githubusercontent.com/nongyen/Chia-Smart-Duo-Node/main/Screenshot%202021-05-25%20225705.png)
 
 โปรแกรมช่วยเพิ่ม Node สำหรับ Chia ทำให้ Sync ได้อย่างรวดเร็ว
 
